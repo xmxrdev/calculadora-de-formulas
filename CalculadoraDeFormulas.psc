@@ -3,7 +3,7 @@
 // Angel Osvaldo Walle Vera
 // Cristian Eduardo Sifuentes Hernandez
 // Erik Daniel Izaguirre Perez
-// Erik Darien Darien Cedillo Garza
+// Erik Darien Cedillo Garza
 // Jeshil Alejandro Arrieta Quintero
 // Omar Emiliano Herrera Fanjon
 
@@ -22,7 +22,7 @@ Funcion ImprimirTitulo
 FinFuncion
 
 Funcion ImprimirOpciones
-	Escribir "  Seleccione una opción..."
+	Escribir "  Seleccione una opciÃ³n..."
 	Escribir "+--------------------------------------------------------+"
 	Escribir "|    1. Trabajo de una fuerza                            |"
 	Escribir "|    2. Trabajo resultante                               |"
@@ -82,13 +82,13 @@ Funcion ImprimirDialogo(dialogo)
 	
 	longitudDialogo <- Longitud(dialogo)
 	
-	ImprimirLinea(longitudDialogo + 4, "·", "·", "·")
+	ImprimirLinea(longitudDialogo + 4, "Â·", "Â·", "Â·")
 	
 	Escribir ":  " Sin Saltar
 	Escribir dialogo Sin Saltar
 	Escribir "  :"
 	
-	ImprimirLinea(longitudDialogo + 4, "·", "·", "·")
+	ImprimirLinea(longitudDialogo + 4, "Â·", "Â·", "Â·")
 FinFuncion
 
 
@@ -161,7 +161,7 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 				ImprimirPregunta("Ingrese la distancia / desplazamiento (en metros)")
 		    	Leer s
 
-				ImprimirPregunta("Ingrese el ángulo entre la fuerza y el movimiento (en grados)")
+				ImprimirPregunta("Ingrese el Ã¡ngulo entre la fuerza y el movimiento (en grados)")
 		    	Leer theta
 
 		    	W <- CalcularTrabajo(F, s, theta)

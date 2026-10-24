@@ -22,15 +22,15 @@ Funcion ImprimirTitulo
 FinFuncion
 
 Funcion ImprimirOpciones
-	Escribir "  Seleccione una opción..."
+	Escribir "  Selecciona una opción..."
 	Escribir "+--------------------------------------------------------+"
 	Escribir "|    1. Trabajo de una fuerza                            |"
 	Escribir "|    2. Trabajo resultante                               |"
-	Escribir "|    3. Energia Cinetica                                 |"
-	Escribir "|    4. Energia Potencial                                |"
-	Escribir "|    5. Teorema trabajo energia                          |"
-	Escribir "|    6. Conversion de la energia                         |"
-	Escribir "|    7. Conservacion con friccion                        |"
+	Escribir "|    3. Energía cinética                                 |"
+	Escribir "|    4. Energía potencial                                |"
+	Escribir "|    5. Teorema del trabajo y la energía                 |"
+	Escribir "|    6. Conservación de la energía                       |"
+	Escribir "|    7. Conservación con fricción                        |"
 	Escribir "|    8. Potencia                                         |"
 	Escribir "|    9. Salir                                            |"
 	Escribir "+--------------------------------------------------------+"
@@ -155,13 +155,13 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 			Definir W Como Real
 
 			Repetir
-				ImprimirPregunta("Ingrese la magnitud de la fuerza (en Newtons)")
+				ImprimirPregunta("Ingresa la magnitud de la fuerza (en Newtons):")
 			    Leer F
 
-				ImprimirPregunta("Ingrese la distancia / desplazamiento (en metros)")
+				ImprimirPregunta("Ingresa la distancia / desplazamiento (en metros):")
 		    	Leer s
 
-				ImprimirPregunta("Ingrese el ángulo entre la fuerza y el movimiento (en grados)")
+				ImprimirPregunta("Ingresa el ángulo entre la fuerza y el movimiento (en grados):")
 		    	Leer theta
 
 		    	W <- CalcularTrabajo(F, s, theta)
@@ -172,7 +172,7 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 		    	Escribir "El trabajo de la fuerza es de: ", W, " J."
 				Escribir ""
 				
-				ImprimirDialogo("Quiere hacer otro calculo de trabajo? (Y / N)")
+				ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
 		    	Leer respuesta
 
 			Hasta Que respuesta = "n" o respuesta = "N"
@@ -187,16 +187,16 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 			Definir W Como Real
 
 			Repetir
-				ImprimirPregunta("Ingrese la magnitud de la fuerza (en Newtons)")
+				ImprimirPregunta("Ingresa la magnitud de la fuerza (en Newtons):")
 				Leer F
 				
-				ImprimirPregunta("Ingrese el valor del coeficiente de friccion (valores de entre 0 y 1) ")
+				ImprimirPregunta("Ingresa el valor del coeficiente de fricción (valores de entre 0 y 1):")
 				Leer micro
 				
-				ImprimirPregunta("Ingrese la masa (en kilogramos) ")
+				ImprimirPregunta("Ingresa la masa (en kilogramos):")
 				Leer m
 				
-				ImprimirPregunta("Ingrese la distancia (en metros) ")
+				ImprimirPregunta("Ingresa la distancia (en metros):")
 				Leer s
 				
 				W <- CalcularTrabajoResultante(F, micro, m, s)
@@ -206,12 +206,12 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 				
 				Escribir "El trabajo resultante es de: ", trabajo, " J."
 
-				ImprimirDialogo("Quiere hacer otro calculo? (Y / N)")
+				ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
 		    	Leer respuesta
 
 			Hasta Que respuesta = "n"
 		3:
-			subtitulo <- "ENERGIA CINETICA"
+			subtitulo <- "ENERGÍA CINÉTICA"
 			
 			// Entradas
 			Definir m Como Real
@@ -221,10 +221,10 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 			Definir energia Como Real
 			
 			Repetir
-				ImprimirPregunta("Ingrese la masa (en kilogramos)")
+				ImprimirPregunta("Ingresa la masa (en kilogramos):")
 				Leer m
 				
-				ImprimirPregunta("Ingrese la velocidad constante (en metros por segundo)")
+				ImprimirPregunta("Ingresa la velocidad constante (en metros por segundo):")
 				Leer v
 				
 				energia <- CalcularEnergiaCinetica(m, v)
@@ -232,14 +232,14 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 				Borrar Pantalla
 				ImprimirTitulo
 				
-				Escribir "La energia cinetica es de ", energia, " J."
+				Escribir "La energía cinética es de: ", energia, " J."
 				
-				ImprimirDialogo("Quiere hacer otro calculo? (Y / N)")
+				ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
 		    	Leer respuesta
 				
 			Hasta Que respuesta = "n"
 		4:
-			subtitulo <- "ENERGIA POTENCIAL"
+			subtitulo <- "ENERGÍA POTENCIAL"
 			
 			// Entradas
 			Definir m Como Real
@@ -249,10 +249,10 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 			Definir energia Como Real
 			
 			Repetir
-				ImprimirPregunta("Ingrese la masa (en kilogramos)")
+				ImprimirPregunta("Ingresa la masa (en kilogramos):")
 				Leer m
 				
-				ImprimirPregunta("Ingrese la altura (en metros) ")
+				ImprimirPregunta("Ingresa la altura (en metros):")
 				Leer h
 				
 				energia <- CalcularEnergiaPotencial(m, h)
@@ -260,14 +260,14 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 				Borrar Pantalla
 				ImprimirTitulo
 				
-				Escribir "La energia potencial es de ", energia, " J."
+				Escribir "La energía potencial es de: ", energia, " J."
 				
-				ImprimirDialogo("Quiere hacer otro calculo? (Y / N)")
+				ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
 		    	Leer respuesta
 				
 			Hasta Que respuesta = "n"
 		5:
-			subtitulo <- "TEOREMA DE TRABAJO-ENERGIA"
+			subtitulo <- "TEOREMA DEL TRABAJO Y LA ENERGÍA"
 			
 			// Entradas
 			Definir m Como Real
@@ -279,16 +279,16 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 			Definir F Como Real
 			
 			Repetir
-				ImprimirPregunta("Ingrese la masa (en kilogramos)")
+				ImprimirPregunta("Ingresa la masa (en kilogramos):")
 				Leer m
 				
-				ImprimirPregunta("Ingrese la velocidad inicial (en metros por segundo)")
+				ImprimirPregunta("Ingresa la velocidad inicial (en metros por segundo):")
 				Leer vo
 				
-				ImprimirPregunta("Ingrese la velocidad final (en metros por segundo)")
+				ImprimirPregunta("Ingresa la velocidad final (en metros por segundo):")
 				Leer vf
 				
-				ImprimirPregunta("Ingrese el desplazamiento (en metros)")
+				ImprimirPregunta("Ingresa el desplazamiento (en metros):")
 				Leer s
 				
 				F <- CalcularTeoremaTrabajoEnergia(m, vo, vf, s)
@@ -296,14 +296,14 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 				Borrar Pantalla
 				ImprimirTitulo
 				
-				Escribir "La fuerza es de ", F, " N."
+				Escribir "La fuerza es de: ", F, " N."
 				
-				ImprimirDialogo("Quiere hacer otro calculo? (Y / N)")
+				ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
 		    	Leer respuesta
 				
 			Hasta Que respuesta = "n"
 		6:
-			subtitulo <- "CONSERVACION DE LA ENERGIA"
+			subtitulo <- "CONSERVACIÓN DE LA ENERGÍA"
 			
 			// Entradas
 			Definir h Como Real
@@ -312,7 +312,7 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 			Definir v Como Real
 			
 			Repetir
-				ImprimirPregunta("Ingrese la altura (en metros)")
+				ImprimirPregunta("Ingresa la altura (en metros):")
 				Leer h
 				
 				v <- CalcularConservacionEnergia(h)
@@ -320,14 +320,14 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 				Borrar Pantalla
 				ImprimirTitulo
 				
-				Escribir "La velocidad es de ", v, " m/s."
+				Escribir "La velocidad es de: ", v, " m/s."
 				
-				ImprimirDialogo("Quiere hacer otro calculo? (Y / N)")
+				ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
 		    	Leer respuesta
 				
 			Hasta Que respuesta = "n"
 		7:
-		    subtitulo <- "CONSERVACION CON FRICCION"
+		    subtitulo <- "CONSERVACIÓN CON FRICCIÓN"
 			
 			// Entradas
 			Definir m Como Real
@@ -339,16 +339,16 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 			Definir vf Como Real
 			
 			Repetir
-				ImprimirPregunta("Ingrese la masa (en kilogramos)")
+				ImprimirPregunta("Ingresa la masa (en kilogramos):")
 				Leer m
 				
-				ImprimirPregunta("Ingrese la altura (en metros)")
+				ImprimirPregunta("Ingresa la altura (en metros):")
 				Leer h
 				
-				ImprimirPregunta("Ingrese la fuerza (en Newtons)")
+				ImprimirPregunta("Ingresa la fuerza (en Newtons):")
 				Leer f
 				
-				ImprimirPregunta("Ingrese el desplazamiento (en metros)")
+				ImprimirPregunta("Ingresa el desplazamiento (en metros):")
 				Leer s
 				
 				vf <- CalcularConservacionFriccion(m, h, f, s)
@@ -356,9 +356,9 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 				Borrar Pantalla
 				ImprimirTitulo
 				
-				Escribir "La velocidad final es de ", vf, " m/s."
+				Escribir "La velocidad final es de: ", vf, " m/s."
 				
-				ImprimirDialogo("Quiere hacer otro calculo? (Y / N)")
+				ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
 		    	Leer respuesta
 				
 			Hasta Que respuesta = "n"

@@ -130,6 +130,10 @@ SubProceso hp <- CalcularPotenciaCaballos(F, v)
 	hp <- F * v
 FinSubProceso
 
+SubProceso hp <- ConvertirVatiosACaballosFuerza(Vatios)
+    hp <- Vatios / 746
+FinSubProceso
+
 Funcion retorno <- Ejecutar(opcion_interfaz)
 	retorno <- 0
 	
@@ -492,7 +496,83 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 				
 			Hasta Que respuesta = "n"
 		8:
-			ImprimirDialogo("Opcion no disponible ::(")
+			Borrar Pantalla
+		    subtitulo <- "POTENCIA"
+			
+			// Entradas
+			Definir W Como Real
+			Definir t Como Real
+			Definir F Como Real
+			Definir v Como Real
+			
+			// Resultado
+			Definir Vatios Como Real
+			Definir CaballosFuerza Como Real
+			
+            Definir sub_opcion Como Entero
+
+            // Ciclo de opcion completa
+            Repetir
+                // Ciclo de sub-opcion
+                Repetir
+                    Borrar Pantalla
+                    ImprimirTitulo
+                    
+                    // Seleccion de opcion multiple
+                    ImprimirDialogo("Seleccione una de las siguientes opciones:")
+                    Escribir "|  1. W (Trabajo) y t (Tiempo)"
+                    Escribir "|  2. F (Fuerza) y v (Velocidad)"
+
+                    Leer sub_opcion
+
+                    Segun sub_opcion Hacer
+                        1:
+                            ImprimirPregunta("Ingresa el trabajo (en joules):") 
+                            Leer W
+
+                            ImprimirPregunta("Ingresa el tiempo (en segundos):") 
+                            Leer t
+
+                            Vatios <- CalcularPotenciaVatios(W, t)
+                            CaballosFuerza <- ConvertirVatiosACaballosFuerza(Vatios)
+                        2:
+                            ImprimirPregunta("Ingresa la fuerza (en Newtons):") 
+                            Leer F
+
+                            ImprimirPregunta("Ingresa la velocidad (en metros por segundo):") 
+                            Leer v
+
+                            Vatios <- CalcularPotenciaCaballos(F, v)
+                            CaballosFuerza <- ConvertirVatiosACaballosFuerza(Vatios)
+                        De Otro Modo:
+                            Escribir "Entrada invalida"
+                            Esperar 1.5 Segundos
+                    FinSegun
+                Hasta Que sub_opcion = 1 O sub_opcion = 2
+
+            Repetir
+                Borrar Pantalla
+                ImprimirTitulo
+
+                // Mostrar el resultado en cada dialogo
+                Escribir "La potencia en Vatios es de ", Vatios, " W."
+                Escribir "La potencia en Caballos de Fuerza es de ", CaballosFuerza, " hp."
+                Escribir ""
+
+                ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
+                Leer respuesta
+                
+                respuesta <- Mayusculas(respuesta) //convierte la entrada en mayuscula
+             
+                Si respuesta <> 'Y' Y respuesta <> 'N' Entonces //condición para "limpiar" la pantalla y mostrar de nuevo el subtítulo
+                    Escribir "Entrada invalida"
+                    Esperar 1.5 Segundos
+                FinSi
+                    
+                Hasta Que respuesta == 'Y' o respuesta == 'N'
+                Borrar Pantalla
+
+            Hasta Que respuesta = 'N'
 		9:
 			retorno <- 2
 		De Otro Modo:

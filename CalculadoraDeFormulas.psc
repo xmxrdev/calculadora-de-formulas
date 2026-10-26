@@ -22,15 +22,15 @@ Funcion ImprimirTitulo
 FinFuncion
 
 Funcion ImprimirOpciones
-	Escribir "  Selecciona una opciÃ³n..."
+	Escribir "  Selecciona una opción..."
 	Escribir "+--------------------------------------------------------+"
 	Escribir "|    1. Trabajo de una fuerza                            |"
 	Escribir "|    2. Trabajo resultante                               |"
-	Escribir "|    3. EnergÃ­a cinÃ©tica                                 |"
-	Escribir "|    4. EnergÃ­a potencial                                |"
-	Escribir "|    5. Teorema del trabajo y la energÃ­a                 |"
-	Escribir "|    6. ConservaciÃ³n de la energÃ­a                       |"
-	Escribir "|    7. ConservaciÃ³n con fricciÃ³n                        |"
+	Escribir "|    3. Energía cinética                                 |"
+	Escribir "|    4. Energía potencial                                |"
+	Escribir "|    5. Teorema del trabajo y la energía                 |"
+	Escribir "|    6. Conservación de la energía                       |"
+	Escribir "|    7. Conservación con fricción                        |"
 	Escribir "|    8. Potencia                                         |"
 	Escribir "|    9. Salir                                            |"
 	Escribir "+--------------------------------------------------------+"
@@ -61,20 +61,20 @@ Funcion ImprimirPregunta(pregunta)
 	ImprimirLinea(longitudPregunta + 4, "~", "~", "~")
 FinFuncion
 
-Funcion ImprimirSubtitulo(subtitulo)
-	Definir longitudPregunta Como Entero
+Funcion ImprimirSubtitulo(subtitulo) //Funcion para mostrar como subtitulo la opción seleccionada
+	Definir longitudSubtitulo Como Entero //corrección en el nombre de la variable
 	Definir i Como Entero
 	
-	longitudSubtitulo <- Longitud(subtitulo)
+	longitudSubtitulo <- Longitud(subtitulo) //corrección en el nombre de la variable
 	
-	ImprimirLinea(longitudPregunta + 8, "[", "=", "]")
+	ImprimirLinea(longitudSubtitulo + 8, "[", "=", "]")  //corrección en el nombre de la variable
 	
 	Escribir "[    " Sin Saltar
 	Escribir subtitulo Sin Saltar
 	Escribir "    ]"
 	
-	ImprimirLinea(longitudPregunta + 8, "[", "=", "]")
-FinFuncion
+	ImprimirLinea(longitudSubtitulo + 8, "[", "=", "]") //corrección en el nombre de la variable
+FinFuncion 
 
 Funcion ImprimirDialogo(dialogo)
 	Definir longitudDialogo Como Entero
@@ -82,43 +82,43 @@ Funcion ImprimirDialogo(dialogo)
 	
 	longitudDialogo <- Longitud(dialogo)
 	
-	ImprimirLinea(longitudDialogo + 4, "Â·", "Â·", "Â·")
+	ImprimirLinea(longitudDialogo + 4, "·", "·", "·")
 	
 	Escribir ":  " Sin Saltar
 	Escribir dialogo Sin Saltar
 	Escribir "  :"
 	
-	ImprimirLinea(longitudDialogo + 4, "Â·", "Â·", "Â·")
+	ImprimirLinea(longitudDialogo + 4, "·", "·", "·")
 FinFuncion
 
 
 
 // Subprocesos de cada formula
-SubProceso trabajo <- CalcularTrabajo(F, s, theta)
-	trabajo <- F * s * cos(theta * PI / 180)
+SubProceso trabajo <- CalcularTrabajo(F, d, theta) //Se cambio "s" por "d"
+	trabajo <- F * d * cos(theta * PI / 180)
 FinSubProceso
 
-SubProceso trabajo <- CalcularTrabajoResultante(F, micro, m, s)
-	trabajo <- (F - micro * m * GRAVEDAD) * s
+SubProceso trabajo <- CalcularTrabajoResultante(F, micro, m, d, GRAVEDAD)//Se cambio "s" por "d"
+	trabajo <- (F - (micro * m * GRAVEDAD)) * d //Se cambio "s" por "d"
 FinSubProceso
 
 SubProceso energia <- CalcularEnergiaCinetica(m, v)
 	energia <- 0.5 * m * v * v
 FinSubProceso
 
-SubProceso energia <- CalcularEnergiaPotencial(m, h)
-	energia <- masa * GRAVEDAD * h
+SubProceso energia <- CalcularEnergiaPotencial(m, h, GRAVEDAD) //Se agrego GRAVEDAD como argumento
+	energia <- m * GRAVEDAD * h
 FinSubProceso
 
 SubProceso fuerza <- CalcularTeoremaTrabajoEnergia(m, vo, vf, s)
 	fuerza <- (0.5 * m * vo * vf - 0.5 * m * vf * vo) / s
 FinSubProceso
 
-SubProceso velocidad <- CalcularConservacionEnergia(h)
+SubProceso velocidad <- CalcularConservacionEnergia(h, GRAVEDAD) //Se agrego GRAVEDAD como argumento
 	velocidad <- Raiz(2 * GRAVEDAD * h)
 FinSubProceso
 
-SubProceso velocidadFinal <- CalcularConservacionFriccion(m, h, f, s)
+SubProceso velocidadFinal <- CalcularConservacionFriccion(m, h, f, s, GRAVEDAD) //Se agrego GRAVEDAD como argumento
 	velocidadFinal <- Raiz(2 * GRAVEDAD * h - (2 * f * s) / (m))
 FinSubProceso
 
@@ -147,127 +147,254 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 		0:
 			retorno <- 1
 		1:
-			subtitulo <- "TRABAJO DE UNA FUERZA"
-
-			Definir F Como Real
-			Definir s Como Real
-			Definir theta como Real
-			Definir W Como Real
-
+			Borrar Pantalla
+			
+			Definir F Como Real //Fuerza
+			Definir d Como Real //Se cambio "s" por "d" >> eso indica distacia, o desplazamiento
+			Definir theta como Real // angulo entre la fuerza y el movimiento
+			Definir W Como Real //Trabajo
+			
 			Repetir
-				ImprimirPregunta("Ingresa la magnitud de la fuerza (en Newtons):")
-			    Leer F
-
-				ImprimirPregunta("Ingresa la distancia / desplazamiento (en metros):")
-		    	Leer s
-
-				ImprimirPregunta("Ingresa el Ã¡ngulo entre la fuerza y el movimiento (en grados):")
-		    	Leer theta
-
-		    	W <- CalcularTrabajo(F, s, theta)
 				
+				subtitulo <- "TRABAJO DE UNA FUERZA" //Reposición para que se muestre el suntítulo cada que se vuelva a realizar un cálculo
+				ImprimirSubtitulo(subtitulo)
+				
+				Repetir
+					ImprimirPregunta("Ingresa la magnitud de la fuerza (en Newtons):")
+					Leer F
+					
+					si F < 0
+						Escribir "La fuerza no puede ser negativa"
+						Esperar 1.5 Segundos
+					FinSi
+				Hasta Que F >= 0
+
+				Repetir
+					ImprimirPregunta("Ingresa la distancia / desplazamiento (en metros):")
+					Leer d //Se cambio "s" por "d"
+					
+					si d < 0 //Se cambio "s" por "d"
+						Escribir "La distancia / desplazamiento no puede ser negativa"
+						Esperar 1.5 Segundos
+					FinSi
+				Hasta Que d >= 0
+				
+				Repetir
+					ImprimirPregunta("Ingresa el ángulo entre la fuerza y el movimiento (en grados):")
+					Leer theta
+					
+					si theta < 0
+						Escribir "El  ángulo entre la fuerza y el movimiento no puede ser negativo"
+						Esperar 1.5 segundos
+					FinSi
+				Hasta Que theta >= 0
+
+		    	W <- CalcularTrabajo(F, d, theta) //Se cambio "s" por "d"
+				
+				Repetir
+					Borrar Pantalla
+					ImprimirTitulo
+					
+					Escribir "El trabajo de la fuerza es de: ", W, " J."
+					Escribir ""
+					
+					ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
+					Leer respuesta
+					
+					respuesta <- Mayusculas(respuesta) //convierte la entrada en mayuscula
+				 
+					Si respuesta <> 'Y' Y respuesta <> 'N' Entonces //condición para "limpiar" la pantalla y mostrar de nuevo el subtítulo
+						Escribir "Entrada invalida"
+						Esperar 1.5 Segundos
+					FinSi
+					
+				Hasta Que respuesta == 'Y' o respuesta == 'N'
 				Borrar Pantalla
-				ImprimirTitulo
-				
-		    	Escribir "El trabajo de la fuerza es de: ", W, " J."
-				Escribir ""
-				
-				ImprimirDialogo("Â¿Quieres hacer otro cÃ¡lculo? (Y / N)")
-		    	Leer respuesta
 
-			Hasta Que respuesta = "n" o respuesta = "N"
+			Hasta Que respuesta = 'N'
 		2:
-			subtitulo <- "TRABAJO RESULTANTE"
+			Borrar Pantalla
+			//subtitulo <- "TRABAJO RESULTANTE"
 			
-			Definir F Como Real
-			Definir micro Como Real
-			Definir m Como Real
-			Definir s Como Real
-			
-			Definir W Como Real
+			Definir F Como Real //Fuerza
+			Definir micro Como Real //coeficiente de friccion
+			Definir m Como Real //masa
+			Definir d Como Real //Se cambio "s" por "d" >> eso indica distacia, o desplazamiento
+			Definir W Como Real //Trabajo
 
 			Repetir
-				ImprimirPregunta("Ingresa la magnitud de la fuerza (en Newtons):")
-				Leer F
 				
-				ImprimirPregunta("Ingresa el valor del coeficiente de fricciÃ³n (valores de entre 0 y 1):")
-				Leer micro
+				subtitulo <- "TRABAJO RESULTANTE"
+				ImprimirSubtitulo(subtitulo)
 				
-				ImprimirPregunta("Ingresa la masa (en kilogramos):")
-				Leer m
+				Repetir 
+					ImprimirPregunta("Ingresa la magnitud de la fuerza (en Newtons):")
+					Leer F
+					
+					si F < 0
+						Escribir "La fuerza no puede ser negativa"
+						Esperar 1.5 Segundos
+					FinSi
+				Hasta Que F >= 0
 				
-				ImprimirPregunta("Ingresa la distancia (en metros):")
-				Leer s
+				Repetir 
+					ImprimirPregunta("Ingresa el valor del coeficiente de fricción (valores de entre 0 y 1):")
+					Leer micro
+					
+					si micro < 0 Y micro > 1
+						Escribir "El valor del coeficien de fricción debe de ser entr 0 y 1"
+						Esperar 1.5 Segundos
+					FinSi
+				Hasta Que micro >= 0 Y micro <= 1
 				
-				W <- CalcularTrabajoResultante(F, micro, m, s)
-
+				Repetir
+					ImprimirPregunta("Ingresa la masa (en kilogramos):")
+					Leer m
+					
+					si m < 0
+						Escribir "La masa no puede ser negativa"
+						Esperar 1.5 Segundos
+					FinSi
+				Hasta Que m >= 0
+				
+				Repetir
+					ImprimirPregunta("Ingresa la distancia (en metros):")
+					Leer d
+					
+					Si d < 0 
+						Escribir "La distancia no puede ser negativa"
+						Esperar 1.5 Segundos
+					FinSi
+				Hasta Que d >= 0
+				
+				W <- CalcularTrabajoResultante(F, micro, m, d, GRAVEDAD)
+				
+				Repetir
+					Borrar Pantalla
+					ImprimirTitulo
+					
+					Escribir "El trabajo resultante es de: ", W, " J."
+					Escribir ""
+				
+					ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
+					Leer respuesta
+					
+					respuesta <- Mayusculas(respuesta) //convierte la entrada en mayuscula
+					
+					Si respuesta <> 'Y' Y respuesta <> 'N' Entonces //condición para "limpiar" la pantalla y mostrar de nuevo el subtítulo
+						Escribir "Entrada invalida"
+						Esperar 1.5 Segundos
+					FinSi
+				Hasta Que respuesta == 'Y' o respuesta == 'N'
 				Borrar Pantalla
-				ImprimirTitulo
-				
-				Escribir "El trabajo resultante es de: ", trabajo, " J."
 
-				ImprimirDialogo("Â¿Quieres hacer otro cÃ¡lculo? (Y / N)")
-		    	Leer respuesta
-
-			Hasta Que respuesta = "n"
+			Hasta Que respuesta = 'N'
 		3:
-			subtitulo <- "ENERGÃA CINÃ‰TICA"
+			Borrar Pantalla
 			
 			// Entradas
 			Definir m Como Real
 			Definir v Como Real
 			
 			// Resultado
-			Definir energia Como Real
+			Definir E Como Real
 			
 			Repetir
-				ImprimirPregunta("Ingresa la masa (en kilogramos):")
-				Leer m
+				subtitulo <- "ENERGÍA CINÉTICA"
+				ImprimirSubtitulo(subtitulo)
 				
-				ImprimirPregunta("Ingresa la velocidad constante (en metros por segundo):")
-				Leer v
+				Repetir
+					ImprimirPregunta("Ingresa la masa (en kilogramos):")
+					Leer m
+					
+					si m < 0
+						Escribir "La masa no puede ser negativa"
+						Esperar 1.5 Segundos
+					FinSi
+				Hasta Que m >= 0
 				
-				energia <- CalcularEnergiaCinetica(m, v)
+				Repetir
+					ImprimirPregunta("Ingresa la velocidad constante (en metros por segundo):")
+					Leer v
+					
+					Si v < 0
+						Escribir "La velocidad constante no puede ser menor a 0"
+						Esperar 1.5 Segundos
+					FinSi
+				Hasta Que v >= 0
 				
+				E <- CalcularEnergiaCinetica(m, v)
+				
+				Repetir
+					Borrar Pantalla
+					ImprimirTitulo
+					
+					Escribir "La energía cinética es de: ", E, " J."
+					Escribir ""
+					
+					ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
+					Leer respuesta
+					
+					respuesta <- Mayusculas(respuesta) //convierte la entrada en mayuscula
+					
+					Si respuesta <> 'Y' Y respuesta <> 'N' Entonces //condición para "limpiar" la pantalla y mostrar de nuevo el subtítulo
+						Escribir "Entrada invalida"
+						Esperar 1.5 Segundos
+					FinSi
+				Hasta Que respuesta == 'Y' o respuesta == 'N'
 				Borrar Pantalla
-				ImprimirTitulo
 				
-				Escribir "La energÃ­a cinÃ©tica es de: ", energia, " J."
-				
-				ImprimirDialogo("Â¿Quieres hacer otro cÃ¡lculo? (Y / N)")
-		    	Leer respuesta
-				
-			Hasta Que respuesta = "n"
+			Hasta Que respuesta = 'N'
 		4:
-			subtitulo <- "ENERGÃA POTENCIAL"
+			Borrar Pantalla
 			
-			// Entradas
 			Definir m Como Real
 			Definir h Como Real
-			
-			// Resultado
-			Definir energia Como Real
+			Definir E Como Real
 			
 			Repetir
-				ImprimirPregunta("Ingresa la masa (en kilogramos):")
-				Leer m
+				
+				subtitulo <- "ENERGÍA POTENCIAL"
+				ImprimirSubtitulo(subtitulo)
+				
+				Repetir
+					ImprimirPregunta("Ingresa la masa (en kilogramos):")
+					Leer m
+					
+					si m < 0
+						Escribir "La masa no puede ser negativa"
+						Esperar 1.5 Segundos
+					FinSi
+				Hasta Que m >= 0
 				
 				ImprimirPregunta("Ingresa la altura (en metros):")
 				Leer h
 				
-				energia <- CalcularEnergiaPotencial(m, h)
+				E <- CalcularEnergiaPotencial(m,h, GRAVEDAD)
 				
+				Repetir
+					Borrar Pantalla
+					ImprimirTitulo
+					
+					Escribir "La energía cinética es de: ", E, " J."
+					Escribir ""
+					
+					ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
+					Leer respuesta
+					
+					respuesta <- Mayusculas(respuesta) //convierte la entrada en mayuscula
+					
+					Si respuesta <> 'Y' Y respuesta <> 'N' Entonces //condición para "limpiar" la pantalla y mostrar de nuevo el subtítulo
+						Escribir "Entrada invalida"
+						Esperar 1.5 Segundos
+					FinSi
+				Hasta Que respuesta == 'Y' o respuesta == 'N'
 				Borrar Pantalla
-				ImprimirTitulo
 				
-				Escribir "La energÃ­a potencial es de: ", energia, " J."
-				
-				ImprimirDialogo("Â¿Quieres hacer otro cÃ¡lculo? (Y / N)")
-		    	Leer respuesta
-				
-			Hasta Que respuesta = "n"
+			Hasta Que respuesta = 'N'
 		5:
-			subtitulo <- "TEOREMA DEL TRABAJO Y LA ENERGÃA"
+			Borrar Pantalla
+			subtitulo <- "TEOREMA DEL TRABAJO Y LA ENERGÍA"
 			
 			// Entradas
 			Definir m Como Real
@@ -298,12 +425,13 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 				
 				Escribir "La fuerza es de: ", F, " N."
 				
-				ImprimirDialogo("Â¿Quieres hacer otro cÃ¡lculo? (Y / N)")
+				ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
 		    	Leer respuesta
 				
 			Hasta Que respuesta = "n"
 		6:
-			subtitulo <- "CONSERVACIÃ“N DE LA ENERGÃA"
+			Borrar Pantalla
+			subtitulo <- "CONSERVACIÓN DE LA ENERGÍA"
 			
 			// Entradas
 			Definir h Como Real
@@ -315,19 +443,20 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 				ImprimirPregunta("Ingresa la altura (en metros):")
 				Leer h
 				
-				v <- CalcularConservacionEnergia(h)
+				v <- CalcularConservacionEnergia(h, GRAVEDAD)
 				
 				Borrar Pantalla
 				ImprimirTitulo
 				
 				Escribir "La velocidad es de: ", v, " m/s."
 				
-				ImprimirDialogo("Â¿Quieres hacer otro cÃ¡lculo? (Y / N)")
+				ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
 		    	Leer respuesta
 				
 			Hasta Que respuesta = "n"
 		7:
-		    subtitulo <- "CONSERVACIÃ“N CON FRICCIÃ“N"
+			Borrar Pantalla
+		    subtitulo <- "CONSERVACIÓN CON FRICCIÓN"
 			
 			// Entradas
 			Definir m Como Real
@@ -351,14 +480,14 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 				ImprimirPregunta("Ingresa el desplazamiento (en metros):")
 				Leer s
 				
-				vf <- CalcularConservacionFriccion(m, h, f, s)
+				vf <- CalcularConservacionFriccion(m, h, f, s, GRAVEDAD)
 				
 				Borrar Pantalla
 				ImprimirTitulo
 				
 				Escribir "La velocidad final es de: ", vf, " m/s."
 				
-				ImprimirDialogo("Â¿Quieres hacer otro cÃ¡lculo? (Y / N)")
+				ImprimirDialogo("¿Quieres hacer otro cálculo? (Y / N)")
 		    	Leer respuesta
 				
 			Hasta Que respuesta = "n"

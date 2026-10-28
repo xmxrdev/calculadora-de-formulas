@@ -23,17 +23,17 @@ FinFuncion
 
 Funcion ImprimirOpciones
 	Escribir "  Selecciona una opción..."
-	Escribir "+--------------------------------------------------------+"
-	Escribir "|    1. Trabajo de una fuerza                            |"
-	Escribir "|    2. Trabajo resultante                               |"
-	Escribir "|    3. Energía cinética                                 |"
-	Escribir "|    4. Energía potencial                                |"
-	Escribir "|    5. Teorema del trabajo y la energía                 |"
-	Escribir "|    6. Conservación de la energía                       |"
-	Escribir "|    7. Conservación con fricción                        |"
-	Escribir "|    8. Potencia                                         |"
-	Escribir "|    9. Salir                                            |"
-	Escribir "+--------------------------------------------------------+"
+	Escribir "+-----------------------------------------------------+"
+	Escribir "|    1. Trabajo de una fuerza                         |"
+	Escribir "|    2. Trabajo resultante                            |"
+	Escribir "|    3. Energía cinética                              |"
+	Escribir "|    4. Energía potencial                             |"
+	Escribir "|    5. Teorema del trabajo y la energía              |"
+	Escribir "|    6. Conservación de la energía                    |"
+	Escribir "|    7. Conservación con fricción                     |"
+	Escribir "|    8. Potencia                                      |"
+	Escribir "|    9. Salir                                         |"
+	Escribir "+-----------------------------------------------------+"
 FinFuncion
 
 Funcion ImprimirLinea(lon, c1, c2, c3)
@@ -351,14 +351,13 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 			Hasta Que respuesta = 'N'
 		4:
 			Borrar Pantalla
+            subtitulo <- "ENERGÍA POTENCIAL"
 			
 			Definir m Como Real
 			Definir h Como Real
 			Definir E Como Real
 			
 			Repetir
-				
-				subtitulo <- "ENERGÍA POTENCIAL"
 				ImprimirSubtitulo(subtitulo)
 				
 				Repetir
@@ -410,6 +409,8 @@ Funcion retorno <- Ejecutar(opcion_interfaz)
 			Definir F Como Real
 			
 			Repetir
+				ImprimirSubtitulo(subtitulo)
+
 				ImprimirPregunta("Ingresa la masa (en kilogramos):")
 				Leer m
 				
